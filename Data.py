@@ -1,6 +1,9 @@
 import csv
 import tweepy
 from tokens import consumer_key, consumer_secret, access_token, access_token_secret
+from Sentiment import TweetAnalyzer
+
+tw = TweetAnalyzer(2500)
 
 def parseTweet(tweet):
     """
@@ -10,8 +13,7 @@ def parseTweet(tweet):
     """
     tweet = tweet._json
     # pprint(tweet)
-    return [tweet['created_at'], tweet['user']['screen_name'], tweet['text']] 
-
+    return [tweet['created_at'], tweet['user']['screen_name'], tweet['text'], tw.classify(tweet['text'])] 
 
 
 # Announce date: 2017-03-29
