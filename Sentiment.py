@@ -47,7 +47,10 @@ class TweetAnalyzer:
         return features
     
     def classify(self, tweet):
-        return self.classifier.classify(self.extractFeatures(tweet.split()))
+        features = self.extractFeatures(tweet.split())
+        classification = self.classifier.classify(features)
+        accuracy = nltk.classify.util.accuracy(self.classifier, features)
+        return (classification, accuracy)
 
 if __name__ == '__main__':
     tw = TweetAnalyzer(100)
